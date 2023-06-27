@@ -93,22 +93,30 @@ void loop() {
 }
 
 void accendi(int val) {
-  if (val == 0) {
-    digitalWrite(ledVerde, HIGH);
-    delay(500);
-    digitalWrite(ledVerde, LOW);
-  } else if (val == 1) {
-    digitalWrite(ledRosso, HIGH);
-    delay(500);
-    digitalWrite(ledRosso, LOW);
-  } else if (val == 2) {
-    digitalWrite(ledGiallo, HIGH);
-    delay(500);
-    digitalWrite(ledGiallo, LOW);
-  } else if (val == 3) {
-    digitalWrite(ledBlu, HIGH);
-    delay(500);
-    digitalWrite(ledBlu, LOW);
+  switch (val) {
+      // TODO: per leggibilita' conviene usare delle costanti invece che numeri
+      case 0: // verde
+          digitalWrite(ledVerde, HIGH);
+          delay(500);
+          digitalWrite(ledVerde, LOW);
+          break;
+      case 1: // rosso
+          digitalWrite(ledRosso, HIGH);
+          delay(500);
+          digitalWrite(ledRosso, LOW);
+          break;
+      case 2: // giallo
+          digitalWrite(ledGiallo, HIGH);
+          delay(500);
+          digitalWrite(ledGiallo, LOW);
+          break;
+      case 3: // blue
+          digitalWrite(ledBlu, HIGH);
+          delay(500);
+          digitalWrite(ledBlu, LOW);
+          break;
+      default:
+          break;
   }
 }
 
@@ -118,36 +126,23 @@ void prova() {
     Serial.println();
     if (digitalRead(buttonVerde) == 0) {
       risposta[s] = 0;
-      //Serial.print(risposta[s]);
-      delay(300);
-      if (risposta[s] != gioco[s])
-        risultato = false;
-      s++;
     }
     if (digitalRead(buttonRosso) == 0) {
       risposta[s] = 1;
-      //Serial.print(risposta[s]);
-      delay(300);
-      if (risposta[s] != gioco[s])
-        risultato = false;
-      s++;
     }
     if (digitalRead(buttonGiallo) == 0) {
       risposta[s] = 2;
-      Serial.print(risposta[s]);
-      delay(300);
-      if (risposta[s] != gioco[s])
-        risultato = false;
-      s++;
     }
     if (digitalRead(buttonBlu) == 0) {
       risposta[s] = 3;
-      //Serial.print(risposta[s]);
-      delay(300);
-      if (risposta[s] != gioco[s])
-        risultato = false;
-      s++;
     }
+
+    //Serial.print(risposta[s]);
+    delay(300);
+    if (risposta[s] != gioco[s])
+        risultato = false;
+    s++;
+
   } while ((risposta[livello] == 4) && (risultato));
 
   for (int i = 0; i < 10; i++) {
